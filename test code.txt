@@ -1,0 +1,108 @@
+import javax.swing.*;
+
+public class LoginRegisterGUI {
+
+    JFrame frame;
+
+    JTextField txtUsername;
+    JPasswordField txtPassword;
+    JButton btnRegister;
+    JButton btnLoginButton;
+
+    String savedUsername = "";
+    String savedPassword = "";
+
+    private void Register (){
+        savedUsername = txtUsername.getText();
+        savedPassword = new String(txtPassword.getPassword());
+
+        if (savedUsername.isEmpty() || savedPassword.isEmpty()){
+
+        JOptionPane.showMessageDialog(
+            frame, 
+            "Please complete all field." );
+
+    }
+        JOptionPane.showMessageDialog(
+            frame,
+            "Registration successful"
+        );
+
+        txtUsername.setText("");
+        txtPassword.setText("");
+
+    }
+
+    private void Login (){
+        String username = txtUsername.getText();
+        String password = new String(txtPassword.getPassword());
+
+        if (username.equals(savedUsername) && 
+            password.equals(savedPassword)) {
+
+            
+        JOptionPane.showMessageDialog(
+            frame,
+            "Login Successful."
+        );
+
+    } else {
+        JOptionPane.showMessageDialog(
+            frame,
+            "Invalid username or password/"
+        );
+    }
+    }
+
+
+    public LoginRegisterGUI () {
+
+        frame = new JFrame ();
+
+        frame.setTitle("Login and Registration");
+        frame.setSize(400,280);
+        frame.setLayout(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+    JLabel lblUser = new JLabel("Username: ");
+    lblUser.setBounds(50, 50, 100, 30);
+
+        txtUsername = new JTextField();
+        txtUsername.setBounds(150, 50, 170, 30);
+
+    JLabel lblPass = new JLabel("Password: ");
+    lblPass.setBounds(50, 100, 100, 30);
+
+        txtPassword = new JPasswordField();
+        txtPassword.setBounds(150, 100, 170,30);
+
+    btnRegister = new JButton("Register");
+    btnRegister.setBounds(70, 160, 110, 35);
+
+
+    btnLoginButton = new JButton ("Login");
+    btnLoginButton.setBounds (200, 160, 110, 35);
+
+    
+    frame.add(btnRegister);
+    frame.add(btnLoginButton);
+    frame.add(lblUser);
+    frame.add(txtUsername);
+    frame.add(lblPass);
+    frame.add(txtPassword);
+
+    frame.setLocationRelativeTo(null);
+    frame.setVisible(true);
+
+
+    }
+
+    
+    public static void main(String[] args) {
+        new LoginRegisterGUI();
+    }
+
+
+
+}
