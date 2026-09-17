@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.Font;
 
-public class MyGUI {
+public class Calculator {
 
     static int firstNumber = 0;
     static int secondNumber = 0;
