@@ -3,22 +3,26 @@ import java.awt.Font;
 
 public class Calculator {
 
-    static int firstNumber = 0;
-    static int secondNumber = 0;
-    static boolean enteringSecondNumber = false;
+    JFrame design;
+    JLabel label1;
 
-    public static void main(String[] args) {
-        JFrame design = new JFrame("Calculator");
+    int firstNumber = 0;
+    int secondNumber = 0;
+    String operator = "+";
+    boolean enteringSecondNumber = false;
+
+    public Calculator() {
+
+        design = new JFrame("Calculator");
         design.setLayout(null);
 
-        // Display 
-        JLabel label1 = new JLabel("0");
-            label1.setBounds(10, 10, 380, 100);
-            label1.setFont(new Font("SansSerif", Font.BOLD, 48));
-            label1.setHorizontalAlignment(SwingConstants.RIGHT);
+        // main display
+        label1 = new JLabel("0");
+        label1.setBounds(10, 10, 380, 100);
+        label1.setFont(new Font("SansSerif", Font.BOLD, 48));
+        label1.setHorizontalAlignment(SwingConstants.RIGHT);
 
-
-        // Digit buttons 
+        // digit buttons
         JButton button0 = new JButton("0");
         button0.setBounds(10, 425, 95, 55);
 
@@ -49,133 +53,48 @@ public class Calculator {
         JButton button9 = new JButton("9");
         button9.setBounds(200, 245, 95, 55);
 
-
         // operator buttons
-        JButton buttonPlus = new JButton("+");
-        buttonPlus.setBounds(295, 305, 95, 55);
+        JButton buttonAdd = new JButton("+");
+        buttonAdd.setBounds(295, 365, 95, 55);
+
+        JButton buttonSubtract = new JButton("-");
+        buttonSubtract.setBounds(295, 305, 95, 55);
+
+        JButton buttonMultiply = new JButton("x");
+        buttonMultiply.setBounds(295, 245, 95, 55);
+
+        JButton buttonDivide = new JButton("/");
+        buttonDivide.setBounds(295, 185, 95, 55);
 
         JButton buttonEquals = new JButton("=");
-        buttonEquals.setBounds(295, 365, 95, 55);
+        buttonEquals.setBounds(295, 425, 95, 55);
 
         JButton buttonClear = new JButton("C");
-        buttonClear.setBounds(295, 245, 95, 55);
-
+        buttonClear.setBounds(200, 185, 95, 55);
 
         // action listeners
-        button0.addActionListener(e -> {
-            if (!enteringSecondNumber) {
-                firstNumber = 0;
-                label1.setText("0");
-            } else {
-                secondNumber = 0;
-                label1.setText(firstNumber + " + " + secondNumber);
-            }
-        });
+        button0.addActionListener(e -> digitPressed(0));
+        button1.addActionListener(e -> digitPressed(1));
+        button2.addActionListener(e -> digitPressed(2));
+        button3.addActionListener(e -> digitPressed(3));
+        button4.addActionListener(e -> digitPressed(4));
+        button5.addActionListener(e -> digitPressed(5));
+        button6.addActionListener(e -> digitPressed(6));
+        button7.addActionListener(e -> digitPressed(7));
+        button8.addActionListener(e -> digitPressed(8));
+        button9.addActionListener(e -> digitPressed(9));
 
-        button1.addActionListener(e -> {
-            if (!enteringSecondNumber) {
-                firstNumber = 1;
-                label1.setText("1");
-            } else {
-                secondNumber = 1;
-                label1.setText(firstNumber + " + " + secondNumber);
-            }
-        });
+        buttonAdd.addActionListener(e -> operatorPressed("+"));
+        buttonSubtract.addActionListener(e -> operatorPressed("-"));
+        buttonMultiply.addActionListener(e -> operatorPressed("x"));
+        buttonDivide.addActionListener(e -> operatorPressed("/"));
 
-        button2.addActionListener(e -> {
-            if (!enteringSecondNumber) {
-                firstNumber = 2;
-                label1.setText("2");
-            } else {
-                secondNumber = 2;
-                label1.setText(firstNumber + " + " + secondNumber);
-            }
-        });
-
-        button3.addActionListener(e -> {
-            if (!enteringSecondNumber) {
-                firstNumber = 3;
-                label1.setText("3");
-            } else {
-                secondNumber = 3;
-                label1.setText(firstNumber + " + " + secondNumber);
-            }
-        });
-
-        button4.addActionListener(e -> {
-            if (!enteringSecondNumber) {
-                firstNumber = 4;
-                label1.setText("4");
-            } else {
-                secondNumber = 4;
-                label1.setText(firstNumber + " + " + secondNumber);
-            }
-        });
-
-        button5.addActionListener(e -> {
-            if (!enteringSecondNumber) {
-                firstNumber = 5;
-                label1.setText("5");
-            } else {
-                secondNumber = 5;
-                label1.setText(firstNumber + " + " + secondNumber);
-            }
-        });
-
-        button6.addActionListener(e -> {
-            if (!enteringSecondNumber) {
-                firstNumber = 6;
-                label1.setText("6");
-            } else {
-                secondNumber = 6;
-                label1.setText(firstNumber + " + " + secondNumber);
-            }
-        });
-
-        button7.addActionListener(e -> {
-            if (!enteringSecondNumber) {
-                firstNumber = 7;
-                label1.setText("7");
-            } else {
-                secondNumber = 7;
-                label1.setText(firstNumber + " + " + secondNumber);
-            }
-        });
-
-        button8.addActionListener(e -> {
-            if (!enteringSecondNumber) {
-                firstNumber = 8;
-                label1.setText("8");
-            } else {
-                secondNumber = 8;
-                label1.setText(firstNumber + " + " + secondNumber);
-            }
-        });
-
-        button9.addActionListener(e -> {
-            if (!enteringSecondNumber) {
-                firstNumber = 9;
-                label1.setText("9");
-            } else {
-                secondNumber = 9;
-                label1.setText(firstNumber + " + " + secondNumber);
-            }
-        });
-
-        buttonPlus.addActionListener(e -> {
-            enteringSecondNumber = true;
-            label1.setText(firstNumber + " + ");
-        });
-
-        buttonEquals.addActionListener(e -> {
-            int result = firstNumber + secondNumber;
-            label1.setText(String.valueOf(result));
-            enteringSecondNumber = false;
-        });
+        buttonEquals.addActionListener(e -> calculation());
 
         buttonClear.addActionListener(e -> {
             firstNumber = 0;
             secondNumber = 0;
+            operator = "+";
             enteringSecondNumber = false;
             label1.setText("0");
         });
@@ -192,7 +111,10 @@ public class Calculator {
         design.add(button7);
         design.add(button8);
         design.add(button9);
-        design.add(buttonPlus);
+        design.add(buttonAdd);
+        design.add(buttonSubtract);
+        design.add(buttonMultiply);
+        design.add(buttonDivide);
         design.add(buttonEquals);
         design.add(buttonClear);
 
@@ -200,5 +122,51 @@ public class Calculator {
         design.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         design.setLocationRelativeTo(null);
         design.setVisible(true);
+    }
+
+    private void digitPressed(int digit) {
+        if (!enteringSecondNumber) {
+            firstNumber = digit;
+            label1.setText(String.valueOf(digit));
+        } else {
+            secondNumber = digit;
+            label1.setText(firstNumber + " " + operator + " " + secondNumber);
+        }
+    }
+
+    private void operatorPressed(String op) {
+        operator = op;
+        enteringSecondNumber = true;
+        label1.setText(firstNumber + " " + op + " ");
+    }
+
+    private void calculation() {
+
+        int result;
+
+        if (operator.equals("+")) {
+            result = firstNumber + secondNumber;
+        } else if (operator.equals("-")) {
+            result = firstNumber - secondNumber;
+        } else if (operator.equals("x")) {
+            result = firstNumber * secondNumber;
+        } else {
+            if (secondNumber == 0) {
+                label1.setText("Error");
+                firstNumber = 0;
+                secondNumber = 0;
+                operator = "+";
+                enteringSecondNumber = false;
+                return;
+            }
+            result = firstNumber / secondNumber;
+        }
+
+        label1.setText(String.valueOf(result));
+
+        firstNumber = result;
+        secondNumber = 0;
+        operator = "+";
+        enteringSecondNumber = false;
     }
 }
