@@ -1,6 +1,6 @@
 when you play the program it shows the only the option between register and login
 
-then after you choose between the register and login the chosen on, it's frame appears then after everything goes through it will open the calculator file for the user to be able to acces the calculator
+then after you choose between the register and login the, chosen one, it's frame appears then after everything goes through, it will open the calculator file for the user to be able to acces the calculator
 
 
 different file for 
