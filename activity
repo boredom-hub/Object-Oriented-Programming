@@ -1,0 +1,12 @@
+java activity: constructor and this
+
+task: Create a java class named STudent that demonstrates constuctor overlaoding anf the this keyword in java.
+
+requirements:  
+- Utilize OOP different files for compatible components
+- Create three variable: name, age, and course.
+- create a constructor that accepts only name and set default values for age and course using this().
+- use this. when assigning values.
+- create displayInfo() method.
+- in main(), create two Student objects, one using each constructor
+- display both student information.
